@@ -5,7 +5,14 @@
             <title>Login</title>
         </head>
         <body>
-            <form method="POST" action="">
+
+        {% for message in messages %}
+        <script>
+            alert("{{message}}")
+        </script>
+        {% endfor %}
+
+            <form method="POST" action="{% url 'login' %}">
 
                 {% csrf_token %}
 

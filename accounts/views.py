@@ -1,9 +1,10 @@
-from django.contrib.auth import authenticate, login
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
-def teste(request):
+def login_view(request):
     if request.method == 'POST':
         email = request.POST.get('email')
         senha = request.POST.get('senha')
@@ -11,12 +12,22 @@ def teste(request):
         if email and senha:
             user = authenticate(username=email, password=senha)
         else:
-            return HttpResponse("Os campos devem ser preenchidos")
+            messages.error(request, "Os campos devem ser preenchidos")
+            return render(request, "accounts/home1.html")
 
         if user is not None:
             login(request, user)
-            return HttpResponse("Login realizado com sucesso")
+            return redirect('home')
         else:
-            return HttpResponse("Senha ou Email invalido")
+            messages.error(request, "Senha ou Email invalido")
+            return render(request, "accounts/home1.html")
     else:
-        return render(request,"accounts/login.html")
+        return render(request,"accounts/home1.html")
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
+
+@login_required(login_url="/accounts/home1/")
+def home(request):
+    return render(request,"accounts/home.html")
