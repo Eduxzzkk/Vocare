@@ -1,0 +1,6 @@
+<h1>Carreiras sugeridas para {{ tentativa.usuario.nome }}</h1>
+<ol>
+  {% for carreira, pontos in ranking %}
+    <li>{{ carreira.nome }} — {{ pontos }} pontos</li>
+  {% endfor %}
+</ol>
