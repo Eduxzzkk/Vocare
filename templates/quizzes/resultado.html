@@ -1,0 +1,19 @@
+<h1>Resultado de {{ tentativa.usuario }}</h1>
+
+<h2>Seu perfil vocacional</h2>
+<ul>
+  {% for dimensao, valor in perfil %}
+    <li>{{ dimensao.nome }}: {{ valor|floatformat:2 }}</li>
+  {% empty %}
+    <li>Nenhuma dimensão foi medida por este quiz.</li>
+  {% endfor %}
+</ul>
+
+<h2>Carreiras sugeridas</h2>
+<ol>
+  {% for carreira, afinidade in ranking %}
+    <li>{{ carreira.nome }}: {{ afinidade|floatformat:2 }}</li>
+  {% empty %}
+    <li>Nenhuma carreira com perfil cadastrado para este resultado.</li>
+  {% endfor %}
+</ol>
