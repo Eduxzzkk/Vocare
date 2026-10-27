@@ -4,27 +4,28 @@ from django.contrib.auth.models import  AbstractUser, BaseUserManager
 # Create your models here.
 
 class CustomUserManager(BaseUserManager):
-    def create_user(self, email, password = None, **extra_fields):
+    def create_user(self, email, password=None, **extra_fields):
         email = self.normalize_email(email)
-        user = self.model(email = email, **extra_fields)
+        extra_fields.setdefault("username", email)
+
+        user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, password = None, **extra_fields):
-        extra_fields.setdefault('is_staff', True)
-        extra_fields.setdefault('is_superuser', True)
+    def create_superuser(self, email, password=None, **extra_fields):
+        email = self.normalize_email(email)
+        extra_fields.setdefault("username", email)
+        extra_fields.setdefault("is_staff", True)
+        extra_fields.setdefault("is_superuser", True)
 
-        if (extra_fields["is_staff"] != True):
-            raise ValueError ("Precisa ser um staff")
+        if extra_fields["is_staff"] is not True:
+            raise ValueError("Precisa ser um staff")
 
-        if (extra_fields["is_superuser"] != True):
-            raise ValueError ("Precisa ser um super usuario")
+        if extra_fields["is_superuser"] is not True:
+            raise ValueError("Precisa ser um superusuário")
 
-        user = self.model(email = email, **extra_fields)
-        user.set_password(password)
-        user.save(using=self._db)
-        return user
+        return self.create_user(email, password, **extra_fields)
 
 class CustomUser(AbstractUser):
     email = models.EmailField(unique=True)

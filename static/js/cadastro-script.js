@@ -13,6 +13,6 @@ togglePassword.addEventListener("click", () => {
 });
 
 document.getElementById("signupForm").addEventListener("submit", (event) => {
-  event.preventDefault();
+
   window.location.assign("../pagina-em-branco.html");
 });

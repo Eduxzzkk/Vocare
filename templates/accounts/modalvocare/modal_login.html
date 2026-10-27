@@ -33,7 +33,7 @@
               <h1 id="login-title" class="modal__title">Bem-vindo de volta<img class="modal__logo" src="assets/modal-vocare-logo.png" alt="Vocare" /></h1>
             </div>
 
-            <form id="login-form" class="form" novalidate>
+            <form id="login-form" class="form" method="post" action="{% url ' login_modal' %}" novalidate>
 
               <!-- E-mail -->
               <div class="field">
@@ -97,3 +97,24 @@
       </div>
     </div>
   </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Verifica se a URL termina com #login-modal
+    if (window.location.hash === '#login-modal') {
+        const modal = document.getElementById('login-modal');
+
+        if (modal) {
+            // Ativa o modal mudando os atributos que você definiu
+            modal.setAttribute('data-open', 'true');
+            modal.setAttribute('aria-hidden', 'false');
+
+            // Opcional: Adiciona foco ao campo de e-mail para melhorar a experiência do usuário
+            const emailInput = document.getElementById('email');
+            if (emailInput) {
+                emailInput.focus();
+            }
+        }
+    }
+  });
+</script>

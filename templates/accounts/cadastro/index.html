@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -9,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="../../../static/css/cadastro-style.css">
+  <link rel="stylesheet" href="{% static 'css/cadastro-style.css' %}">
 </head>
 <body>
   <main class="page">
@@ -18,9 +19,18 @@
       <div class="form-container">
         <h1 class="signup-title">
           Criar uma conta
-          <img class="signup-logo" src="../../../static/assets/modal-vocare-logo.png" alt="Vocare">
+          <img class="signup-logo" src="{% static 'assets/modal-vocare-logo.png' %}" alt="Vocare">
         </h1>
-        <form id="signupForm">
+         <form id="signupForm" method="post" action="{% url 'cadastro' %}">
+            {% csrf_token %}
+
+              {% if messages %}
+                {% for message in messages %}
+                 <p class="form-message">{{ message }}</p>
+                {% endfor %}
+              {% endif %}
+
+
           <div class="name-grid">
             <div class="field">
               <label for="firstName">Nome</label>
@@ -85,7 +95,7 @@
 
         <p class="login-text">
           Já possui uma conta?
-          <a href="../index.html#login">Entrar</a>
+          <a href="{% url 'login'%}#login-modal">Entrar</a>
         </p>
       </div>
     </section>
