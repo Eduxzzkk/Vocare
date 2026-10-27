@@ -1,0 +1,347 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --blue-950: #172554;
+  --blue-900: #1e3a8a;
+  --blue-800: #1e40af;
+  --blue-700: #1d4ed8;
+  --blue-600: #2563eb;
+  --blue-500: #3b82f6;
+  --blue-400: #6d8fd6;
+  --blue-300: #93c5fd;
+  --blue-200: #bfdbfe;
+  --blue-100: #dbeafe;
+  --blue-50: #eff6ff;
+  --border: #bfdbfe;
+  --text: #172554;
+  --muted: #6d8fd6;
+  --error: #b91c1c;
+
+  font-family: "Poppins", sans-serif;
+  color: var(--text);
+  background: var(--blue-50);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--blue-50);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.page {
+  min-height: 100vh;
+  padding: 18px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  background:
+    radial-gradient(circle at 10% 10%, rgba(39,129,232,.08), transparent 25%),
+    var(--blue-50);
+}
+
+/* Lado do formulário */
+.signup-panel {
+  min-height: calc(100vh - 36px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: rgba(255,255,255,.96);
+  padding: 55px 65px;
+  box-shadow: 0 15px 45px rgba(8,41,91,.07);
+}
+
+.form-container {
+  width: 100%;
+  max-width: 392px;
+}
+
+.signup-title {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 0;
+  color: #11114e;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.875rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -.02em;
+  text-align: center;
+  text-wrap: balance;
+  margin-bottom: 24px;
+}
+
+.signup-logo {
+  display: block;
+  width: auto;
+  height: 1.3em;
+  margin: .1em auto 0;
+}
+
+#signupForm {
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+}
+
+.name-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.field label {
+  color: var(--blue-900);
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.field input {
+  width: 100%;
+  height: 52px;
+  padding: .75rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: .375rem;
+  outline: none;
+  background: #fff;
+  color: var(--blue-950);
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  transition: border-color .2s, box-shadow .2s;
+}
+
+.field input::placeholder {
+  color: #6d8fd6;
+  font-family: "Poppins", sans-serif;
+}
+
+.field input:focus {
+  border-color: var(--blue-600);
+  box-shadow: 0 0 0 4px var(--blue-100);
+}
+
+.password-wrapper {
+  position: relative;
+}
+
+.password-wrapper input {
+  padding-right: 48px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  color: var(--blue-400);
+  font-size: 14px;
+}
+
+.check-line {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.check-line input {
+  width: 15px;
+  height: 15px;
+  margin: 1px 0 0;
+  flex: 0 0 auto;
+  accent-color: var(--blue-600);
+}
+
+.check-line a {
+  color: var(--blue-700);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.check-line a:hover {
+  text-decoration: underline;
+}
+
+.submit-btn {
+  width: 100%;
+  height: 52px;
+  margin-top: 4px;
+  border: 0;
+  border-radius: .375rem;
+  background: linear-gradient(135deg, var(--blue-900), #11114e);
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 10px 15px -3px rgba(17,17,78,.3);
+  transition: filter .2s;
+}
+
+.submit-btn:hover {
+  filter: brightness(.9);
+}
+
+.login-text {
+  margin: 22px 0 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.login-text a {
+  color: var(--blue-700);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.login-text a:hover {
+  text-decoration: underline;
+}
+
+/* Lado direito: sem background */
+.visual-panel {
+  position: relative;
+  min-height: calc(100vh - 36px);
+  overflow: hidden;
+  border: 1px solid rgba(23,105,210,.12);
+  border-radius: 18px;
+  background: transparent;
+}
+
+.visual-content {
+  position: relative;
+  min-height: 100%;
+  padding: 90px 75px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.accent-line {
+  width: 55px;
+  height: 5px;
+  margin-bottom: 27px;
+  border-radius: 10px;
+  background: var(--blue-600);
+}
+
+.eyebrow {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 18px;
+  color: var(--blue-600);
+  font-family: "Poppins", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .14em;
+}
+
+blockquote {
+  position: relative;
+  z-index: 2;
+  max-width: 610px;
+  margin: 0;
+  color: var(--blue-950);
+  font-family: "Poppins", sans-serif;
+  font-size: clamp(30px, 4vw, 48px);
+  line-height: 1.13;
+  letter-spacing: -.045em;
+  font-weight: 500;
+}
+
+.quote-author {
+  position: relative;
+  z-index: 2;
+  margin: 20px 0 0;
+  color: var(--blue-400);
+  font-family: "Poppins", sans-serif;
+  font-size: 17px;
+  font-style: italic;
+  font-weight: 600;
+}
+
+.blue-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(2px);
+}
+
+.orb-one {
+  width: 310px;
+  height: 310px;
+  top: 8%;
+  right: -120px;
+  background: radial-gradient(circle, rgba(39,129,232,.12), transparent 68%);
+}
+
+.orb-two {
+  width: 400px;
+  height: 400px;
+  bottom: -180px;
+  left: -180px;
+  background: radial-gradient(circle, rgba(23,105,210,.09), transparent 68%);
+}
+
+@media (max-width: 980px) {
+  .page {
+    grid-template-columns: 1fr;
+  }
+
+  .visual-panel {
+    min-height: 520px;
+  }
+
+  .signup-panel {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .page {
+    padding: 0;
+    display: block;
+  }
+
+  .signup-panel {
+    min-height: 100vh;
+    border: 0;
+    border-radius: 0;
+    padding: 42px 22px;
+  }
+
+  .visual-panel {
+    display: none;
+  }
+
+  .name-grid {
+    grid-template-columns: 1fr;
+  }
+}

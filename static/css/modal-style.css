@@ -1,0 +1,244 @@
+/* ===== Variáveis e base ===== */
+    #login-modal {
+      --blue-950: #172554;
+      --blue-900: #1e3a8a;
+      --blue-800: #1e40af;
+      --blue-700: #1d4ed8;
+      --blue-600: #2563eb;
+      --blue-400: #6d8fd6;
+      --blue-300: #93c5fd;
+      --blue-200: #bfdbfe;
+      --blue-100: #dbeafe;
+      --blue-50: #eff6ff;
+
+      /* Ajustes da imagem (1 = original): brilho menor = mais escura; saturação menor = cores mais suaves */
+      --image-brightness: 0.68;
+      --image-saturation: 0.8;
+    }
+
+    #login-modal *, #login-modal *::before, #login-modal *::after { box-sizing: border-box; }
+
+#login-modal h1, #login-modal p { margin: 0; }
+    #login-modal button, #login-modal input { font: inherit; }
+    #login-modal .is-hidden { display: none; }
+    html.no-scroll { overflow: hidden; }
+
+    /* ===== Página de demonstração ===== */
+
+#login-modal .btn-primary {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      border: 0;
+      border-radius: 0.5rem; 
+      background: #11114e;
+      color: #fff;
+      font-weight: 400;
+      cursor: pointer;
+      box-shadow: 0 10px 15px -3px rgba(29, 78, 216, 0.25);
+      transition: filter 0.2s;
+    }
+    #login-modal .btn-primary:hover { filter: brightness(0.9); }
+    #login-modal .btn-primary:focus-visible { outline: 0; box-shadow: 0 0 0 4px var(--blue-300); }
+
+/* Botão "Entrar" do formulário (dentro do modal) */
+    #login-modal .form .btn-primary {
+      font-family: "Poppins", ui-sans-serif, system-ui, sans-serif;
+      border-radius: 0.375rem;
+      background: linear-gradient(135deg, var(--blue-900), #11114e);
+      box-shadow: 0 10px 15px -3px rgba(17, 17, 78, 0.3);
+    }
+
+    /* ===== Modal ===== */
+    #login-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.3s, visibility 0.3s;
+    }
+    #login-modal[data-open="true"] { visibility: visible; opacity: 1; }
+
+    #login-modal .modal__backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(23, 37, 84, 0.5);
+      -webkit-backdrop-filter: blur(4px);
+      backdrop-filter: blur(4px);
+    }
+
+    #login-modal .modal__scroll { position: relative; height: 100%; overflow-y: auto; }
+
+    #login-modal .modal__center {
+      min-height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    #login-modal .modal__card {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      width: 100%;
+      max-width: 60rem;
+      padding: 0;
+      overflow: hidden;
+      background: #fff;
+      border-radius: 0.25rem;
+      box-shadow: 0 25px 50px -12px rgba(23, 37, 84, 0.3);
+      transform: scale(0.95) translateY(0.75rem);
+      transition: transform 0.3s;
+    }
+    #login-modal[data-open="true"] .modal__card { transform: none; }
+
+    /* Painel da imagem */
+    #login-modal .modal__media {
+      position: relative;
+      height: 9rem;
+      overflow: hidden;
+    }
+    #login-modal .modal__media img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 54%;
+      filter: brightness(var(--image-brightness)) saturate(var(--image-saturation));
+    }
+    /* Painel do formulário */
+    #login-modal .modal__panel {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 1.5rem 1.25rem 2rem;
+    }
+
+    #login-modal .modal__close {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      width: 2.5rem;
+      height: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      border-radius: 50%;
+      background: transparent;
+      color: var(--blue-400);
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    #login-modal .modal__close:hover { background: var(--blue-50); color: var(--blue-700); }
+    #login-modal .modal__close:focus-visible { outline: 0; box-shadow: 0 0 0 4px var(--blue-200); }
+
+    #login-modal .modal__header { margin: 0.5rem 0 2rem; text-align: center; }
+    #login-modal .modal__title {
+      margin-bottom: 0;
+      font-size: 1.875rem;
+      line-height: 1.2;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      text-wrap: balance;
+      color: #11114e;
+    }
+    /* Logotipo "Vocare" logo abaixo do título, centralizado (acompanha a fonte, em) */
+    #login-modal .modal__logo {
+      display: block;
+      height: 1.3em;
+      width: auto;
+      margin: 0.1em auto 0;
+    }
+
+    #login-modal .form__signup { text-align: center; color: var(--blue-800); font-size: 0.9375rem; }
+
+    #login-modal .link {
+      color: var(--blue-600);
+      font-weight: 600;
+      text-decoration: none;
+      font-family: "Poppins", sans-serif;
+      margin-bottom: -10px;
+    }
+    #login-modal .link:hover { color: var(--blue-800); text-decoration: underline; }
+    #login-modal .link:focus-visible { outline: 0; text-decoration: underline; }
+
+    /* Formulário */
+    #login-modal .form { display: flex; flex-direction: column; gap: 1.25rem; }
+
+    #login-modal .field + .field { margin-top: 0.25rem; }
+
+    #login-modal .field__label {
+      display: block;
+      margin-bottom: 0.25rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--blue-900);
+    }
+
+    #login-modal .field__input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--blue-200);
+      border-radius: 0.375rem;
+      background: #fff;
+      color: var(--blue-950);
+      outline: 0;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    #login-modal .field__input::placeholder { font-family: "Poppins", ui-sans-serif, system-ui, sans-serif; color: var(--blue-400); }
+    #login-modal .field__input:focus {
+      border-color: var(--blue-600);
+      box-shadow: 0 0 0 4px var(--blue-100);
+    }
+
+    #login-modal .field__wrap { position: relative; }
+    #login-modal .field__wrap .field__input { padding-right: 3rem; }
+
+    #login-modal .field__toggle {
+      position: absolute;
+      top: 50%;
+      right: 0.625rem;
+      transform: translateY(-50%);
+      width: 2rem;
+      height: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      border-radius: 50%;
+      background: transparent;
+      color: var(--blue-400);
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    #login-modal .field__toggle:hover { background: var(--blue-50); color: var(--blue-700); }
+    #login-modal .field__toggle:focus-visible { outline: 0; box-shadow: 0 0 0 2px var(--blue-300); }
+
+    #login-modal .form__row {
+      margin-top: 1.5rem; /* espaço extra abaixo do campo de senha */
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.75rem;
+    }
+    #login-modal .form__row .link { font-size: 0.875rem; }
+
+    #login-modal .icon { width: 1.25rem; height: 1.25rem; }
+
+    /* ===== Telas maiores: imagem à esquerda ===== */
+    @media (min-width: 768px) {
+      #login-modal .modal__card { grid-template-columns: 1fr 1fr; }
+      #login-modal .modal__media { height: auto; min-height: 37rem; }
+      #login-modal .modal__media img { object-position: 50% 40%; }
+      #login-modal .modal__panel { padding: 3rem 2.75rem; }
+      #login-modal .modal__close { top: 0.75rem; right: 0.75rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #login-modal, #login-modal .modal__card { transition: none; }
+    }

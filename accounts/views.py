@@ -2,32 +2,48 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-# Create your views here.
+
+
+def lading_page(request):
+    if request.user.is_authenticated:
+        return redirect("home")
+
+    return render(request, "accounts/index.html")
+
 
 def login_view(request):
-    if request.method == 'POST':
-        email = request.POST.get('email')
-        senha = request.POST.get('senha')
+    if request.user.is_authenticated:
+        return redirect("home")
 
-        if email and senha:
-            user = authenticate(username=email, password=senha)
-        else:
-            messages.error(request, "Os campos devem ser preenchidos")
-            return render(request, "accounts/home1.html")
+    if request.method == "POST":
+        email = request.POST.get("email", "").strip()
+        password = request.POST.get("password", "")
+
+        if not email or not password:
+            messages.error(request, "Preencha todos os campos.")
+            return redirect("lading_page")
+
+        user = authenticate(
+            request,
+            username=email,
+            password=password
+        )
 
         if user is not None:
             login(request, user)
-            return redirect('home')
-        else:
-            messages.error(request, "Senha ou Email invalido")
-            return render(request, "accounts/home1.html")
-    else:
-        return render(request,"accounts/home1.html")
+            return redirect("home")
+
+        messages.error(request, "E-mail ou senha inválidos.")
+        return redirect("lading_page")
+
+    return redirect("lading_page")
+
 
 def logout_view(request):
     logout(request)
-    return redirect('login')
+    return redirect("lading_page")
 
-@login_required(login_url="/accounts/home1/")
+
+@login_required(login_url="login")
 def home(request):
-    return render(request,"accounts/home.html")
+    return render(request, "accounts/home.html")

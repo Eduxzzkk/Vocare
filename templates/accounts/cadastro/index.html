@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Criar uma conta</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../../static/css/cadastro-style.css">
+</head>
+<body>
+  <main class="page">
+
+    <section class="signup-panel">
+      <div class="form-container">
+        <h1 class="signup-title">
+          Criar uma conta
+          <img class="signup-logo" src="../../../static/assets/modal-vocare-logo.png" alt="Vocare">
+        </h1>
+        <form id="signupForm">
+          <div class="name-grid">
+            <div class="field">
+              <label for="firstName">Nome</label>
+              <input
+                id="firstName"
+                name="firstName"
+                type="text"
+                placeholder="Seu nome"
+                autocomplete="given-name"
+              >
+            </div>
+
+            <div class="field">
+              <label for="lastName">Sobrenome</label>
+              <input
+                id="lastName"
+                name="lastName"
+                type="text"
+                placeholder="Seu sobrenome"
+                autocomplete="family-name"
+              >
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="email">E-mail</label>
+            <input
+              id="email"
+              name="email"
+              type="text"
+              placeholder="vocare@exemplo.com"
+              autocomplete="email"
+            >
+          </div>
+
+          <div class="field">
+            <label for="password">Senha</label>
+            <div class="password-wrapper">
+              <input
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Digite sua senha"
+                autocomplete="new-password"
+              >
+              <button
+                type="button"
+                class="toggle-password"
+                id="togglePassword"
+                aria-label="Mostrar senha"
+              >◉</button>
+            </div>
+          </div>
+
+          <label class="check-line">
+            <input type="checkbox" id="terms">
+            <span>Li e concordo com os <a href="../index.html#footer-legal">Termos de uso e Privacidade</a></span>
+          </label>
+
+          <button class="submit-btn" type="submit">Criar conta</button>
+        </form>
+
+        <p class="login-text">
+          Já possui uma conta?
+          <a href="../index.html#login">Entrar</a>
+        </p>
+      </div>
+    </section>
+
+    <section class="visual-panel">
+      <div class="visual-content">
+        <div class="accent-line"></div>
+
+        <blockquote>
+          “A carreira é o curso de vida de uma pessoa ao encontrar uma série
+          de tarefas de desenvolvimento e tentar enfrentá-las de modo a
+          tornar-se o tipo de pessoa que deseja ser”
+        </blockquote>
+
+        <cite class="quote-author">Donald E. Super</cite>
+
+        <div class="blue-orb orb-one"></div>
+        <div class="blue-orb orb-two"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="../../../static/js/cadastro-script.js"></script>
+</body>
+</html>

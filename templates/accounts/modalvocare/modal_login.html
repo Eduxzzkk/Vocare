@@ -1,0 +1,99 @@
+<div
+    id="login-modal"
+    class="modal"
+    data-open="false"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="login-title"
+    aria-hidden="true"
+  >
+    <!-- Fundo escurecido -->
+    <div data-close class="modal__backdrop"></div>
+
+    <div class="modal__scroll">
+      <div data-close class="modal__center">
+
+        <div class="modal__card">
+
+          <!-- Painel da imagem (esquerda) -->
+          <div class="modal__media">
+            <img src="assets/login-graduation.jpg" alt="Capelo de formatura sobre um bloco azul" />
+          </div>
+
+          <!-- Painel do formulário (direita) -->
+          <div class="modal__panel">
+
+            <button type="button" data-close aria-label="Fechar" class="modal__close">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M18 6 6 18" /><path d="m6 6 12 12" />
+              </svg>
+            </button>
+
+            <div class="modal__header">
+              <h1 id="login-title" class="modal__title">Bem-vindo de volta<img class="modal__logo" src="assets/modal-vocare-logo.png" alt="Vocare" /></h1>
+            </div>
+
+            <form id="login-form" class="form" novalidate>
+
+              <!-- E-mail -->
+              <div class="field">
+                <label for="email" class="field__label">E-mail</label>
+                <input
+                  id="email"
+                  class="field__input"
+                  type="email"
+                  name="email"
+                  autocomplete="email"
+                  placeholder="vocare@exemplo.com"
+                  required
+                />
+              </div>
+
+              <!-- Senha -->
+              <div class="field">
+                <label for="password" class="field__label">Senha</label>
+                <div class="field__wrap">
+                  <input
+                    id="password"
+                    class="field__input"
+                    type="password"
+                    name="password"
+                    autocomplete="current-password"
+                    placeholder="Digite a senha"
+                    required
+                  />
+                  <button id="toggle-password" type="button" class="field__toggle" aria-label="Mostrar senha">
+                    <svg id="icon-eye" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
+                      <circle cx="12" cy="12" r="3" />
+                    </svg>
+                    <svg id="icon-eye-off" class="icon is-hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49" />
+                      <path d="M14.084 14.158a3 3 0 0 1-4.242-4.242" />
+                      <path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143" />
+                      <path d="m2 2 20 20" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Esqueceu a senha -->
+              <div class="form__row">
+                <a id="recover-password" href="#recuperar-senha" class="link">Esqueceu a senha?</a>
+              </div>
+
+              <!-- Enviar -->
+              <p id="login-message" class="login-message" role="status" aria-live="polite"></p>
+              <button type="submit" class="btn-primary">Continuar</button>
+
+              <!-- Cadastro -->
+              <p class="form__signup">
+                Não tem uma conta?
+                <a href="cadastro/index.html" class="link">Cadastre-se</a>
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
