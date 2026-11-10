@@ -1,0 +1,6 @@
+<h1>Carreiras:</h1>
+<ul>
+    {% for carreira in carreiras %}
+    <li><a href="/carreiras/{{carreira.id}}/">{{carreira.nome}}</a></li>
+    {% endfor %}
+</ul>

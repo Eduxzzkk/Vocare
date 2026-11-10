@@ -1,0 +1,87 @@
+{% load static %}
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f4f7fc" />
+    <title>Quizzes — Vocare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/home.css' %}" />
+  </head>
+  <body>
+    <a class="skip-link" href="#conteudo">Pular para os quizzes</a>
+    <div class="authenticated-shell">
+      <aside class="sidebar" aria-label="Menu do Vocare">
+        <a class="brand" href="{% url 'home' %}" aria-label="Vocare — página inicial autenticada">
+          <img src="{% static 'assets/vocare-logo.png' %}" alt="Vocare" />
+        </a>
+        <nav class="side-nav" aria-label="Navegação principal">
+          <a class="side-link" href="{% url 'home' %}">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m3.5 10 8.5-7 8.5 7v10a1 1 0 0 1-1 1h-15a1 1 0 0 1-1-1V10Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9 21v-7h6v7" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+            Visão geral
+          </a>
+          <a class="side-link is-active" href="{% url 'lista_quizzes' %}" aria-current="page">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 3.5h10a2 2 0 0 1 2 2v15H5v-15a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M8.5 8h7M8.5 12h7M8.5 16h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+            Quizzes
+          </a>
+          <a class="side-link" href="{% url 'lista_carreiras' %}">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="m15.8 8.2-2.2 5.4-5.4 2.2 2.2-5.4 5.4-2.2Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+            Carreiras
+          </a>
+          <span class="side-link is-unavailable" aria-disabled="true" title="Seção ainda sem rota no Back-end">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4.5 5.5h6a3 3 0 0 1 3 3v11h-6a3 3 0 0 0-3 1v-15Zm15 0h-6a3 3 0 0 0-3 3v11h6a3 3 0 0 1 3 1v-15Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+            Biblioteca
+          </span>
+          <span class="side-link is-unavailable" aria-disabled="true" title="Seção ainda sem rota no Back-end">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5.5h16v11H11l-5 3v-3H4v-11Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M8 10h8m-8 3h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+            Fórum
+          </span>
+        </nav>
+        <div class="sidebar-bottom">
+          <a class="side-link more-link" href="{% url 'logout' %}">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M10 17l5-5-5-5m5 5H3m9-9h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Sair
+          </a>
+        </div>
+      </aside>
+
+      <main class="home-main" id="conteudo">
+        <section class="quiz-screen" aria-labelledby="quizzes-title">
+          <header class="quiz-heading">
+            <h1 id="quizzes-title">Quizzes</h1>
+            <p class="quiz-instructions">Escolha um quiz, clique em “Iniciar Quiz” e responda às perguntas selecionando uma alternativa por etapa.</p>
+          </header>
+
+          <div class="quiz-list" id="lista-quizzes" aria-label="Lista de quizzes">
+            {% for quiz in quizzes %}
+              <article class="quiz-card {% cycle 'card-artistic' 'card-analytic' 'card-social' %}">
+                <div class="card-copy">
+                  <span class="card-tag">QUIZ</span>
+                  <h2>{{ quiz.titulo }}</h2>
+                  {% if quiz.descricao %}
+                    <p>{{ quiz.descricao }}</p>
+                  {% endif %}
+                  <p class="quiz-question-count">
+                    {% with quantidade=quiz.perguntas.count %}
+                      {{ quantidade }} {% if quantidade == 1 %}pergunta{% else %}perguntas{% endif %}
+                    {% endwith %}
+                  </p>
+                </div>
+                {% if quiz.perguntas.count %}
+                  <a class="start-quiz" href="{% url 'detalhe_quiz' quiz.id %}">Iniciar Quiz</a>
+                {% else %}
+                  <span class="start-quiz is-unavailable" aria-disabled="true">Em preparação</span>
+                {% endif %}
+              </article>
+            {% empty %}
+              <p class="quiz-empty-state">Ainda não há quizzes cadastrados. Quando a equipe publicar um quiz, ele aparecerá aqui.</p>
+            {% endfor %}
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

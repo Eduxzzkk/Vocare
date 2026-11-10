@@ -1,0 +1,71 @@
+{% load static %}
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#faf9f6" />
+    <title>{{ quiz.titulo }} — Vocare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/home.css' %}" />
+    <script src="{% static 'js/quizzes-integracao.js' %}" defer></script>
+  </head>
+  <body>
+    <div class="authenticated-shell quiz-fullscreen">
+      <main class="home-main" id="conteudo">
+        <section class="quiz-screen quiz-session" id="tela-perguntas" aria-labelledby="titulo-quiz" data-id-quiz="{{ quiz.id }}">
+          <div class="session-heading">
+            <h1 id="titulo-quiz">{{ quiz.titulo }}</h1>
+            {% with perguntas=quiz.perguntas.all %}
+              {% if perguntas %}
+                <div class="progress-heading">
+                  <span id="progresso-texto" aria-live="polite">Pergunta 1 de {{ perguntas|length }}</span>
+                  <span id="progresso-percentual">0%</span>
+                </div>
+                <div class="progress-track" id="barra-progresso" role="progressbar" aria-label="Progresso do quiz" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                  <span id="barra-progresso-preenchida"></span>
+                </div>
+              {% endif %}
+            {% endwith %}
+            <p class="question-alert" id="aviso-respostas" role="status" aria-live="polite" hidden></p>
+          </div>
+
+          {% with perguntas=quiz.perguntas.all %}
+            {% if perguntas %}
+              <form id="formulario-quiz" method="post" action="{% url 'detalhe_quiz' quiz.id %}" data-id-quiz="{{ quiz.id }}">
+                {% csrf_token %}
+                {% for pergunta in perguntas %}
+                  <section class="question-card" data-pergunta data-indice-pergunta="{{ forloop.counter0 }}" aria-labelledby="titulo-pergunta-{{ pergunta.id }}" {% if not forloop.first %}hidden{% endif %}>
+                    <p class="question-number">QUESTÃO {{ forloop.counter|stringformat:'02d' }}</p>
+                    <h2 id="titulo-pergunta-{{ pergunta.id }}">{{ pergunta.texto }}</h2>
+                    <fieldset class="answer-list">
+                      <legend class="sr-only">Escolha uma alternativa</legend>
+                      {% for alternativa in pergunta.alternativas.all %}
+                        <label class="answer-option">
+                          <input type="radio" name="pergunta_{{ pergunta.id }}" value="{{ alternativa.id }}" />
+                          <span>{{ alternativa.texto }}</span>
+                        </label>
+                      {% empty %}
+                        <p>Esta questão ainda não tem alternativas cadastradas.</p>
+                      {% endfor %}
+                    </fieldset>
+                  </section>
+                {% endfor %}
+
+                <div class="question-actions">
+                  <button class="button-secondary" id="pergunta-anterior" type="button" hidden>Anterior</button>
+                  <button class="button-primary" id="proxima-pergunta" type="button" disabled>Próxima pergunta</button>
+                  <button class="button-primary" id="concluir-quiz" type="submit" hidden>Concluir quiz</button>
+                </div>
+              </form>
+            {% else %}
+              <p class="quiz-empty-state">Este quiz ainda não tem perguntas disponíveis.</p>
+            {% endif %}
+          {% endwith %}
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
