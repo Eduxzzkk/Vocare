@@ -2,7 +2,6 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Quiz, Alternativa, Tentativa, Resposta
 from django.contrib.auth.decorators import login_required
 from .services import calcular_perfil, ranking_carreiras
-from collections import defaultdict
 
 def lista_quizzes(request):
     quizzes = Quiz.objects.all()

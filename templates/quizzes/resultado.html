@@ -1,19 +1,44 @@
-<h1>Resultado de {{ tentativa.usuario }}</h1>
+{% load static %}
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#faf9f6" />
+    <title>Resultado — {{ tentativa.quiz.titulo }} — Vocare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/home.css' %}" />
+  </head>
+  <body>
+    <div class="authenticated-shell quiz-fullscreen">
+      <main class="home-main" id="conteudo">
+        <section class="quiz-result-screen" aria-labelledby="titulo-resultado">
+          <p class="result-kicker">QUIZ CONCLUÍDO</p>
+          <h1 id="titulo-resultado">Seu resultado</h1>
+          <p class="result-quiz-title">{{ tentativa.quiz.titulo }}</p>
+          <section class="result-card" aria-labelledby="titulo-pontuacoes">
+            <h2 id="titulo-pontuacoes">Pontuações por dimensão</h2>
+            {% if perfil %}
+              <dl class="dimension-results">
+                {% for dimensao, valor in perfil %}
+                  <div class="dimension-result">
+                    <dt>{{ dimensao.nome }}</dt>
+                    <dd>{{ valor|floatformat:2 }}</dd>
+                  </div>
+                {% endfor %}
+              </dl>
+            {% else %}
+              <p class="result-empty-state">Não há pontuações de dimensão cadastradas para este quiz.</p>
+            {% endif %}
+          </section>
 
-<h2>Seu perfil vocacional</h2>
-<ul>
-  {% for dimensao, valor in perfil %}
-    <li>{{ dimensao.nome }}: {{ valor|floatformat:2 }}</li>
-  {% empty %}
-    <li>Nenhuma dimensão foi medida por este quiz.</li>
-  {% endfor %}
-</ul>
-
-<h2>Carreiras sugeridas</h2>
-<ol>
-  {% for carreira, afinidade in ranking %}
-    <li>{{ carreira.nome }}: {{ afinidade|floatformat:2 }}</li>
-  {% empty %}
-    <li>Nenhuma carreira com perfil cadastrado para este resultado.</li>
-  {% endfor %}
-</ol>
+          <div class="result-actions">
+            <a class="button-primary result-back-button" href="{% url 'lista_quizzes' %}">Voltar ao catálogo de Quizzes</a>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
