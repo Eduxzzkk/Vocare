@@ -1,0 +1,26 @@
+<h1>Seu resultado acumulado</h1>
+
+<p>Calculado a partir dos quizzes que você respondeu:</p>
+<ul>
+  {% for tentativa in tentativas %}
+    <li>{{ tentativa.quiz.titulo }} ({{ tentativa.data|date:"d/m/Y" }})</li>
+  {% empty %}
+    <li>Você ainda não respondeu nenhum quiz.</li>
+  {% endfor %}
+</ul>
+
+<h2>Seu perfil vocacional</h2>
+<ul>
+  {% for dimensao, valor in perfil %}
+    <li>{{ dimensao.nome }}: {{ valor|floatformat:2 }}</li>
+  {% endfor %}
+</ul>
+
+<h2>Carreiras sugeridas</h2>
+<ol>
+  {% for carreira, afinidade in ranking %}
+    <li>{{ carreira.nome }}: {{ afinidade|floatformat:2 }}</li>
+  {% empty %}
+    <li>Ainda não há carreiras para sugerir.</li>
+  {% endfor %}
+</ol>

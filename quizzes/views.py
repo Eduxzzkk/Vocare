@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Quiz, Alternativa, Tentativa, Resposta
 from django.contrib.auth.decorators import login_required
-from .services import calcular_perfil, ranking_carreiras
+from .services import calcular_perfil, calcular_perfil_acumulado, ranking_carreiras, ultimas_tentativas
 
 def lista_quizzes(request):
     quizzes = Quiz.objects.all()
@@ -32,3 +32,14 @@ def resultado_tentativa(request, tentativa_id):
         'ranking': ranking_carreiras(perfil)[:3],
     }
     return render(request, 'quizzes/resultado.html', contexto)
+
+@login_required
+def resultado_acumulado(request):
+    tentativas = ultimas_tentativas(request.user)
+    perfil = calcular_perfil_acumulado(tentativas)
+    contexto = {
+        'tentativas': tentativas,
+        'perfil': sorted(perfil.items(), key=lambda par: par[1], reverse=True),
+        'ranking': ranking_carreiras(perfil)[:5],
+    }
+    return render(request, 'quizzes/resultado_acumulado.html', contexto)
